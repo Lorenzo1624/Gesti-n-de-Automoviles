@@ -1,0 +1,19 @@
+
+<ul>
+  <a>
+    <li>
+      Nombre: {{ car.name }}  
+      Vendedor: {{ car.vendor }} 
+      Fecha de publicación: {{ car.published_date }}
+      Precio: ${{ car.price }}
+      Descripción: {{ car.description  }}
+      ¿Ha sido vendido?: 
+      {% if car.is_sold %}
+      Sí.
+      {% else %}
+      No.
+      {% endif %}
+      </p>
+    </li>
+    </a>
+</ul>

@@ -1,0 +1,32 @@
+
+{% block content %}
+<div>
+    <h2>Iniciar sesión.</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div>
+                Su usuario y contraseña no coinciden. Inténtelo de nuevo.
+            </div>
+        {% endif %}
+        
+        <div>
+            <label for="id_username">Nombre de usuario</label>
+            <input type="text" name="username" id="id_username" required>
+        </div>
+        
+        <div>
+            <label for="id_password">Contraseña</label>
+            <input type="password" name="password" id="id_password" required>
+        </div>
+        
+        <button type="submit">Iniciar sesión</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    
+    <p>
+        ¿No tiene una cuenta? <a href="{% url 'sign_up' %}">Regístrese.</a><br>
+    </p>
+</div>
+{% endblock %}

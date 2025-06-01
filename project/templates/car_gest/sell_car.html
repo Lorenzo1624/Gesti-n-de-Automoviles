@@ -1,0 +1,6 @@
+<h2>Venda su carro.</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ car_form.as_p }}
+    <button type="submit">Subir venta.</button>
+</form>
