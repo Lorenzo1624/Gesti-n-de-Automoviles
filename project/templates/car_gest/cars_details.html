@@ -1,19 +1,73 @@
+{% load static tailwind_tags %}
+<head>
+<title>Carro de {{ car.vendor }}</title>
+    {% tailwind_css %}
+</head>
 
-<ul>
-  <a>
-    <li>
-      Nombre: {{ car.name }}  
-      Vendedor: {{ car.vendor }} 
-      Fecha de publicación: {{ car.published_date }}
-      Precio: ${{ car.price }}
-      Descripción: {{ car.description  }}
-      ¿Ha sido vendido?: 
-      {% if car.is_sold %}
-      Sí.
-      {% else %}
-      No.
-      {% endif %}
-      </p>
-    </li>
-    </a>
-</ul>
+<div class="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-lg my-8">
+    <div class="flex flex-col md:flex-row gap-8">
+        <!-- Imagen del carro -->
+        <div class="md:w-1/2">
+            <div class="bg-gray-100 rounded-lg overflow-hidden h-64 md:h-96 flex items-center justify-center">
+                {% if car.image %}
+                <img src="{{ car.image.url }}" alt="{{ car.name }}" class="object-cover w-full h-full">
+                {% else %}
+                <svg class="w-24 h-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Detalles del carro -->
+        <div class="md:w-1/2">
+            <div class="flex justify-between items-start mb-4">
+                <h1 class="text-3xl font-bold text-gray-900">{{ car.name }}</h1>
+                <span class="px-4 py-2 bg-{% if car.is_sold %}red{% else %}green{% endif %}-100 text-{% if car.is_sold %}red{% else %}green{% endif %}-800 text-sm font-semibold rounded-full">
+                    {% if car.is_sold %}Vendido{% else %}Disponible{% endif %}
+                </span>
+            </div>
+            
+            <div class="text-2xl font-bold text-blue-600 mb-6">${{ car.price }}</div>
+            
+            <div class="space-y-4 mb-6">
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-medium text-gray-700">Vendedor:</span>
+                    <span class="ml-2 text-gray-600">{{ car.vendor }}</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-medium text-gray-700">Publicado:</span>
+                    <span class="ml-2 text-gray-600">{{ car.published_date|date:"d/m/Y" }}</span>
+                </div>
+                
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-medium text-gray-700">Ubicación:</span>
+                    <span class="ml-2 text-gray-600">{{ car.location }}</span>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">Descripción</h2>
+                <p class="text-gray-700 whitespace-pre-line">{{ car.description }}</p>
+            </div>
+            
+            {% if not car.is_sold and user.is_authenticated and user != car.vendor %}
+            <div class="mt-8">
+                <button class="w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-300 shadow-md">
+                    Contactar al vendedor
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

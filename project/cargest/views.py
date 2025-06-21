@@ -13,7 +13,8 @@ from django.contrib.auth.decorators import login_required
 
 
 def home (request):
-    return render(request, "base/home.html")
+    cars = Car.objects.all().order_by('name', 'price', 'published_date')
+    return render(request, "base/home.html", {'cars': cars})
 
 def cargest(request):
     return render(request, "car_gest/available_cars.html")
@@ -76,3 +77,7 @@ def sign_up(request):
         form = CustomUserCreationForm()
 
    return render(request, 'car_gest/sign_up.html', {'form': form})
+
+
+def tuabuela(request):
+    return render(request, 'base/tuabuela.html')

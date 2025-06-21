@@ -30,7 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [      
+    'tailwind',
+    'carwind',
+    'django_browser_reload',
     'cargest.apps.CargestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+TAILWIND_APP_NAME = 'carwind'
+
 MIDDLEWARE = [
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,8 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'cargest.CustomUser'  # Tell Django to use your model
-
+AUTH_USER_MODEL = 'cargest.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
