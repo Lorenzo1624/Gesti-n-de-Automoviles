@@ -1,39 +1,42 @@
 {% load static tailwind_tags %}
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="height: 100%;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Página web de compra y venta de automóviles">
     <title>Compra y Venta de Automóviles</title>
-    {% tailwind_css %}
+    {% tailwind_css %} 
 </head>
 
 
-<body>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+
 
 
     <header>
         <h1 class="text-4xl md:text-6xl lg:text-9xl text-center text-white drop-shadow-black py-4 bg-blue-600">
             Compra y venta de automóviles
         </h1>
+
+         {% if user.is_authenticated %}
         <nav>
-            <ul class="flex justify-center bg-blue-900">
-                <li><a class="block py-2 px-4 text-center text-white">
-                        Inicio</a>
-                <li><a class="block py-2 px-4 text-center text-white">
-                        Tienda</a>
-                <li><a class="block py-2 px-4 text-center text-white">
-                        Sobre nosotros</a>
+            <ul class="flex justify-center bg-blue-900"> 
+               
+                <li><a href="{% url 'logout' %}" class="block py-2 px-4 text-center text-white">
+                        Cerrar sesión</a>
+                    {% else %}
+                   
             </ul>
         </nav>
+        {% endif %}
     </header>
 
 
 
-    <main>
+<main style="flex: 1;">
         <section>
             {% if user.is_authenticated %}
             <div class="flex items-center justify-between">
@@ -64,47 +67,55 @@
                     </li>
 
                     <li class="pt-2">
-                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                            Contactar
-                        </button>
+                        <a href="{% url 'details' car_id=car.id %}"
+                            class="w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                            Comprar
+                        </a>
                     </li>
                 </ul>
                 {% endfor %}
+
+
                 {% endif %}
+            </div>
         </section>
         {% else %}
-        <div class="flex justify-center space-x-4 m-10 rounded-lg bg-white px-6 py-8 shadow-xl ring-1 ring-slate-900/5">
-            <h3 class="text-xl text-center text-red-700 mb-8">
+        <div
+            class="flex flex-col items-center space-y-4 m-10 rounded-lg bg-white px-6 py-8 shadow-xl ring-1 ring-slate-900/5">
+            <h3 class="text-xl text-center text-red-700">
                 Si desea comprar un auto, primero debe iniciar sesión o registrarse.
             </h3>
+
             {% if user.is_authenticated %}
             <span class="font-medium">Bienvenido, {{ user.username }}.</span>
-
-            <div>
-                <a href="{% url 'log_out' %}" class="text-blue-600 hover:text-blue-800 hover:underline">Cerrar
-                    sesión</a>
-            </div>
             {% endif %}
-            <a href="/log_in" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">Iniciar
-                sesión</a>
-            <a href="/sign_up"
-                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Registrarse</a>
+
+            <div class="flex space-x-4"> 
+                <a href="/log_in" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                    Iniciar sesión
+                </a>
+                <a href="/sign_up" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                    Registrarse
+                </a>
+            </div>
         </div>
         {% endif %}
     </main>
 
-<footer class="bg-blue-800 text-white p-8 w-full absolute bottom-0">
-    <div class="max-w-4xl mx-auto flex justify-between items-start">
-        <div>
-            <h5 class="text-xl font-bold">Sobre nosotros:</h5>
-            <p>Somos una empresa dedicada específicamente a joderle la vida a los demás, no estamos para nada afiliados al Gobierno cubano. De hecho, tomamos agua por la tarde después de comer calabaza cruda.</p>
+    <footer class="bg-blue-800 text-white p-8 w-full bottom-0 m-auto">
+        <div class="flex max-w-4xl mx-auto  justify-between items-start">
+            <div>
+                <h5 class="text-xl font-bold">Sobre nosotros:</h5>
+                <p>Somos una empresa dedicada específicamente a joderle la vida a los demás, no estamos para nada
+                    afiliados al Gobierno cubano. De hecho, tomamos agua por la tarde después de comer calabaza cruda.
+                </p>
+            </div>
+            <div>
+                <div><strong>Teléfono:</strong> +1 (234) 567-89</div>
+                <div><strong>Email:</strong> contacto@ejemplo.com</div>
+            </div>
         </div>
-        <div>
-            <div><strong>Teléfono:</strong> +1 (234) 567-89</div>
-            <div><strong>Email:</strong> contacto@ejemplo.com</div>
-        </div>
-    </div>
-</footer>
+    </footer>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ from .models import Car, Vendor
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    fields = ["name", "price", "vendor", "description"]
+    fields = ["name", "price", "vendor", "description", "latitude", "longitude"]
 
 @admin.register(Vendor)
 class vendorAdmin(admin.ModelAdmin):

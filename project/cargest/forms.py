@@ -30,12 +30,13 @@ class CarForm(forms.ModelForm):
     
     class Meta:
         model = Car
-        fields = ['name', 'price', 'description']
-        labels = {
-            'name': 'Nombre del auto: ',
-            'price': 'Precio (en dólares): ',
-            'description': 'Descripción del auto: ',
-        }
+        fields = ['name', 'price', 'description', 'latitude', 'longitude']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4}),
+            'latitude': forms.HiddenInput(),
+            'longitude': forms.HiddenInput(),
         }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['latitude'].required = True
+        self.fields['longitude'].required = True

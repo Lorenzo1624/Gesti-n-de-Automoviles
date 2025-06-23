@@ -21,7 +21,7 @@ def cargest(request):
 
 def cars(request):
     cars = Car.objects.all().order_by('name', 'price', 'published_date')
-    return render(request, 'car_gest/available_cars.html', {'cars': cars})
+    return render(request, 'base/home.html', {'cars': cars})
 
 @login_required
 def sell_cars(request):
@@ -78,6 +78,3 @@ def sign_up(request):
 
    return render(request, 'car_gest/sign_up.html', {'form': form})
 
-
-def tuabuela(request):
-    return render(request, 'base/tuabuela.html')

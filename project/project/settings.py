@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [      
     'tailwind',
     'carwind',
+    'leaflet',
     'django_browser_reload',
     'cargest.apps.CargestConfig',
     'django.contrib.admin',
@@ -42,6 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (23.1136, -82.3666),
+    'DEFAULT_ZOOM': 12,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+}
 
 TAILWIND_APP_NAME = 'carwind'
 
@@ -86,6 +96,9 @@ DATABASES = {
     }
 }
 
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
