@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [      
     'tailwind',
+    'widget_tweaks',
     'carwind',
     'leaflet',
     'django_browser_reload',
@@ -51,6 +52,8 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 12,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
+    'SCALE': 'metric',
+    'ATTRIBUTION_PREFIX': 'cargest',
 }
 
 TAILWIND_APP_NAME = 'carwind'

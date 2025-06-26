@@ -1,82 +1,91 @@
 {% load static tailwind_tags %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+
 <head>
-<title>Registro</title>
-<meta charset="utf-8">
-<meta name="viewport" content = "width=device-width">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Regístrese para comprar o vender automóviles en nuestra plataforma">
+    <title>Registro - Compraventa de Automóviles</title>
     {% tailwind_css %}
 </head>
-{% block content %}
-<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Crear una cuenta
-        </h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-            O <a href="{% url 'log_in' %}" class="font-medium text-blue-600 hover:text-blue-500">inicie sesión en su cuenta</a>
-        </p>
-    </div>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form class="space-y-6" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                {% for field in form %}
-                <div>
-                    <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
-                        {{ field.label }}
-                        {% if field.field.required %}
-                        <span class="text-red-500">*</span>
-                        {% endif %}
-                    </label>
-                    <div class="mt-1">
-                        {{ field }}
-                        {% if field.help_text %}
-                        <p class="mt-2 text-sm text-gray-500">{{ field.help_text }}</p>
-                        {% endif %}
-                        {% for error in field.errors %}
-                        <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+<body class="flex flex-col min-h-screen bg-gray-50">
+    <header class="bg-blue-600 text-white shadow-md">
+        <h1 class="text-4xl md:text-6xl text-center py-4 drop-shadow-md">
+            Registro
+        </h1>
+        <nav class="bg-blue-900 flex justify-center py-3">
+</nav>
+    </header>
+
+    <main class="flex-grow">
+        <div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="text-center">
+                    <h2 class="text-3xl font-extrabold text-gray-900">
+                       Si ya tiene una cuenta...
+                    </h2>
+                    
+                        <a href="{% url 'log_in' %}" class="font-medium text-blue-600 hover:text-blue-500 transition">
+                            Inicie sesión
+                        </a>
+                    
+                </div>
+            </div>
+
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <form class="space-y-6" method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                        <div>
+                            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700">
+                                {{ field.label }}
+                                {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            <div class="mt-1 relative">
+                                {{ field|add_class:"block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" }}
+                                {% if field.name == 'password' or field.name == 'password_confirm' %}
+                                <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </button>
+                                {% endif %}
+                            </div>
+                            {% if field.help_text %}
+                            <p class="mt-2 text-sm text-gray-500">{{ field.help_text }}</p>
+                            {% endif %}
+                            {% for error in field.errors %}
+                            <p class="mt-2 text-sm text-red-600">{{ error }}</p>
+                            {% endfor %}
+                        </div>
                         {% endfor %}
+
+                        
+                        <div>
+                            <button type="submit"
+                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+                                Registrarse
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div> 
                     </div>
-                </div>
-                {% endfor %}
-
-                <div class="flex items-center">
-                    <input id="terms" name="terms" type="checkbox" required
-                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    <label for="terms" class="ml-2 block text-sm text-gray-900">
-                        Acepto los <a href="#" class="text-blue-600 hover:text-blue-500">términos y condiciones</a>
-                    </label>
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        Registrarse
-                    </button>
-                </div>
-            </form>
-
-            <div class="mt-6">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div class="relative flex justify-center text-sm">
-                        <span class="px-2 bg-white text-gray-500">
-                            ¿Ya tiene una cuenta?
-                        </span>
-                    </div>
-                </div>
-
-                <div class="mt-6">
-                    <a href="{% url 'log_in' %}"
-                        class="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        Iniciar sesión
-                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-{% endblock %}
+    </main>
+
+    <script src="{% static 'js/register.js' %}"></script>
+</body>
+</html>

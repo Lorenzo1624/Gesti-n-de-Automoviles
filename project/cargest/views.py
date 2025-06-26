@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import login
 from django.contrib.auth import logout
-from django.contrib.auth.forms import UserCreationForm
 from .models import Vendor, Car
 from .forms import CustomUserCreationForm, CarForm
 from django.contrib import messages
@@ -25,15 +24,15 @@ def cars(request):
 
 @login_required
 def sell_cars(request):
-    vendor, created = Vendor.objects.get_or_create(user=request.user)
+    vendor, created = Vendor.objects.get_or_create(user=request.user)  # Desempaqueta la tupla
     if request.method == 'POST':
-        car_form = CarForm(request.POST)
+        car_form = CarForm(request.POST, request.FILES)  # Añadí request.FILES por si recibes archivos
 
         if car_form.is_valid():
             car = car_form.save(commit=False)
-            car.vendor = vendor
+            car.vendor = vendor  # Asigna solo el objeto Vendor, no la tupla
             car.save()
-            return redirect('cargest/', pk=car.pk)
+            return redirect('cargest/', pk=car.pk)  # Verifica que 'cargest/' sea el nombre correcto de tu URL
     else:
         car_form = CarForm()
     

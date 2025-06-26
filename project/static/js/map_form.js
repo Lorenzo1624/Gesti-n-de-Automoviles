@@ -6,14 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const latField = document.querySelector('[name="latitude"]');
     const lngField = document.querySelector('[name="longitude"]');
     
-    // Actualizar campos al mover marcador
     marker.on('dragend', function(e) {
         const latLng = e.target.getLatLng();
         latField.value = latLng.lat;
         lngField.value = latLng.lng;
     });
     
-    // Botón de geolocalización
     document.getElementById('location-btn').addEventListener('click', function() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Validación antes de enviar
     document.querySelector('form').addEventListener('submit', function(e) {
         if (!latField.value || !lngField.value) {
             e.preventDefault();

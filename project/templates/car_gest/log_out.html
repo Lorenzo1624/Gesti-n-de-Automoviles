@@ -1,24 +1,31 @@
 {% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<title>Salir de sesión</title>
+    <title>Salir de sesión</title>
     {% tailwind_css %}
 </head>
+<body>
 {% block content %}
 
-
-{% block content %}
-<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sesión cerrada correctamente
-        </h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
-            Gracias por visitar nuestro sitio. Esperamos volver a verte pronto.
-        </p>
-        <div class="mt-8">
+<main class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <article class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+        <figure>
+            <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </figure>
+        <header>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Sesión cerrada correctamente
+            </h2>
+        </header>
+        <section>
+            <p class="mt-2 text-center text-sm text-gray-600">
+                Gracias por visitar nuestro sitio. Esperamos volver a verte pronto.
+            </p>
+        </section>
+        <footer class="mt-8">
             <a href="{% url 'log_in' %}" 
                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <svg class="-ml-1 mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -26,7 +33,9 @@
                 </svg>
                 Conectarse de nuevo
             </a>
-        </div>
-    </div>
-</div>
+        </footer>
+    </article>
+</main>
 {% endblock %}
+</body>
+</html>

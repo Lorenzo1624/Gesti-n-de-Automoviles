@@ -8,7 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     age = forms.IntegerField(
         label=_("Edad"),
-        required=False,
+        required=True,
     )
     
     class Meta:
@@ -31,6 +31,11 @@ class CarForm(forms.ModelForm):
     class Meta:
         model = Car
         fields = ['name', 'price', 'description', 'latitude', 'longitude']
+        labels = {
+            'name':'Nombre', 
+            'price':'Precio',
+            'description':'Descripción',
+        }
         widgets = {
             'latitude': forms.HiddenInput(),
             'longitude': forms.HiddenInput(),

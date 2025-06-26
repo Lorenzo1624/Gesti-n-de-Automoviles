@@ -1,19 +1,28 @@
 {% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<title>Inicio de sesión</title>
+    <title>Inicio de sesión</title>
     {% tailwind_css %}
 </head>
+
+<body>
+     <header class="bg-blue-600 text-white shadow-md">
+        <h1 class="text-4xl md:text-6xl text-center py-4 drop-shadow-md">
+            Inicio de sesión
+        </h1>
+        <nav class="bg-blue-900 flex justify-center py-3">
+</nav>
+    </header>
+
+
 {% block content %}
+<main class="flex-grow flex items-center justify-center min-h-[calc(100vh-160px)]">
+    
 
-<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 class="mt-6 text-center text-5xl font-extrabold text-black">
-            Iniciar sesión
-        </h2>
-    </div>
-
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <section class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <article class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             {% if form.errors %}
             <div class="mb-4 bg-red-50 border-l-4 border-red-500 p-4">
                 <div class="flex">
@@ -54,21 +63,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember-me" name="remember-me" type="checkbox"
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-                            Recordarme
-                        </label>
-                    </div>
-
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
-                            ¿Olvidó su contraseña?
-                        </a>
-                    </div>
-                </div>
+                
 
                 <div>
                     <button type="submit"
@@ -98,7 +93,9 @@
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        </article>
+    </section>
+</main>
+</body>
 {% endblock %}
+</html>
