@@ -14,6 +14,6 @@ Instalación:
 Windows: nombreDelEntornoVirtual\Scripts\activate (CMD)
 Linux/Mac: source venv/bin/activate
 
-3- Instalar requerimientos yendo a la carpeta del proyecto y poniendo el comando pip install -r requirements.txt. 
+3- Instalar requerimientos yendo a la carpeta del proyecto y poniendo el comando pip install -r requirements-dev.txt. 
 (Aviso: tiene que estar activado el entorno para no instalar globlamente las dependencias)
 4- Abrir el proyecto usando python manage.py runserver.
